@@ -123,40 +123,30 @@
         });
 
         // Form Submission Handler
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Create a custom alert/notification
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 20px;
-                background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-                color: white;
-                padding: 15px 30px;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                z-index: 10000;
-                font-weight: 600;
-                transform: translateX(400px);
-                transition: transform 0.3s ease;
-            `;
-            notification.innerHTML = '<i class="fas fa-check-circle"></i> Message sent successfully!';
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-            
-            this.reset();
-        });
+      
+      document.querySelector('.contact-form').addEventListener('submit', function(e){
 
+      let name=document.querySelector('input[name="name"]').value.trim();
+       let email=document.querySelector('input[name="email"]').value.trim();
+        let message=document.querySelector('textarea[name="message"]').value.trim();
+
+      if(name==="" || email==="" || message===""){
+     e.preventDefault();
+     alert("Please fill all required fields.");
+     return;
+     }
+
+       let emailPattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+     if(!email.match(emailPattern)){
+     e.preventDefault();
+     alert("Enter valid email.");
+     return;
+      }
+
+     // no preventDefault here -> FormSubmit will work
+      alert("Message Sending...");
+          });
         // Add parallax effect to hero image
         document.addEventListener('mousemove', (e) => {
             const heroImage = document.querySelector('.hero-image');
